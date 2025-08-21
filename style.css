@@ -677,3 +677,22 @@ body {
     display: flex;
     gap: 10px;
     flex-wrap
+    /* Ajustes específicos para iOS Safari */
+}@supports (-webkit-touch-callout: none) {
+    html, body {
+        height: -webkit-fill-available !important;
+        min-height: -webkit-fill-available !important;
+        overflow-y: auto !important;
+    }
+
+    .slide {
+        min-height: -webkit-fill-available !important;
+        height: auto !important;
+        padding-bottom: 140px; /* folga extra */
+    }
+
+    .presentation-container {
+        min-height: -webkit-fill-available !important;
+        height: auto !important;
+    }
+}
