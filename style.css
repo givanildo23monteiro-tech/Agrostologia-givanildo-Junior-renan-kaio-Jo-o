@@ -8,7 +8,7 @@
 html, body {
     height: 100%;
     width: 100%;
-    overflow: hidden; /* Prevent body scroll */
+    overflow: hidden;
 }
 
 body {
@@ -22,7 +22,7 @@ body {
     height: 100vh;
     width: 100vw;
     background: #f5f5f5;
-    overflow: hidden; /* Ensure container itself doesn't cause scrollbars */
+    overflow: hidden;
 }
 
 /* Slide Navigation Panel */
@@ -32,7 +32,7 @@ body {
     padding: 20px 10px;
     overflow-y: auto;
     box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
-    flex-shrink: 0; /* Prevent shrinking */
+    flex-shrink: 0;
 }
 
 .nav-slide {
@@ -81,18 +81,18 @@ body {
     flex: 1;
     position: relative;
     background: white;
-    overflow: hidden; /* Ensure main area doesn't cause scrollbars */
+    overflow: hidden;
 }
 
 .slide {
     display: none;
     width: 100%;
-    height: 100vh; /* Use 100vh for full viewport height */
+    height: 100vh;
     padding: 40px;
     background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
     position: relative;
-    overflow-y: auto; /* Allow individual slide content to scroll if needed */
-    box-sizing: border-box; /* Include padding in element's total width and height */
+    overflow-y: auto;
+    box-sizing: border-box;
 }
 
 .slide.active {
@@ -171,9 +171,9 @@ body {
     display: grid;
     grid-template-columns: 1fr 400px;
     gap: 40px;
-    height: calc(100vh - 200px); /* Adjust height to account for header/footer/padding */
-    max-height: calc(100vh - 200px); /* Ensure it doesn't exceed viewport */
-    overflow-y: auto; /* Allow content to scroll if it overflows */
+    height: calc(100vh - 200px);
+    max-height: calc(100vh - 200px);
+    overflow-y: auto;
 }
 
 .content-left {
@@ -687,8 +687,161 @@ body {
     font-weight: 500;
 }
 
-/* Responsive Design */
-@media (max-width: 1200px) {
+/* RESPONSIVIDADE MÓVEL - SIMPLIFICADA E FUNCIONAL */
+@media (max-width: 768px) {
+    /* Container principal em coluna para mobile */
+    .presentation-container {
+        flex-direction: column;
+        height: 100vh;
+    }
+    
+    /* Navegação horizontal no topo */
+    .slide-navigation {
+        width: 100%;
+        height: 80px;
+        display: flex;
+        overflow-x: auto;
+        padding: 10px;
+        flex-shrink: 0;
+    }
+    
+    .nav-slide {
+        min-width: 100px;
+        margin-right: 8px;
+        margin-bottom: 0;
+        padding: 8px;
+        font-size: 0.8rem;
+    }
+    
+    .slide-number {
+        font-size: 14px;
+        margin-bottom: 2px;
+    }
+    
+    .slide-title {
+        font-size: 10px;
+    }
+    
+    .presenter-name {
+        font-size: 8px;
+    }
+    
+    /* Slide principal */
+    .slide {
+        height: calc(100vh - 80px);
+        padding: 15px;
+    }
+    
+    /* Header do slide */
+    .slide-title {
+        font-size: 1.8rem;
+    }
+    
+    .slide-subtitle {
+        font-size: 1rem;
+    }
+    
+    /* Conteúdo em coluna única */
+    .slide-content {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        height: auto;
+        max-height: none;
+    }
+    
+    /* Imagem no topo */
+    .content-right {
+        order: -1;
+    }
+    
+    .slide-image {
+        max-width: 100%;
+        height: 200px;
+    }
+    
+    /* Grids responsivos */
+    .characteristics-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
+    
+    .feature-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    
+    .utilization-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    
+    .animal-types {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    /* Tabela de manejo */
+    .management-row {
+        grid-template-columns: 1fr;
+        gap: 5px;
+        text-align: center;
+        padding: 10px;
+    }
+    
+    /* Controles */
+    .slide-controls {
+        bottom: 10px;
+        padding: 8px 15px;
+        gap: 10px;
+    }
+    
+    .control-btn {
+        width: 35px;
+        height: 35px;
+        font-size: 0.9rem;
+    }
+    
+    .slide-indicator {
+        font-size: 0.9rem;
+        min-width: 50px;
+    }
+    
+    /* Team info */
+    .team-info {
+        position: static;
+        margin: 10px;
+        text-align: center;
+    }
+    
+    .team-members {
+        justify-content: center;
+    }
+    
+    /* Ajustes de fonte */
+    .content-block h3 {
+        font-size: 1.2rem;
+    }
+    
+    .scientific-name {
+        font-size: 1.5rem;
+        padding: 10px;
+    }
+    
+    .big-number {
+        font-size: 2.5rem;
+    }
+    
+    .bullet-list li {
+        font-size: 1rem;
+    }
+    
+    .feature-text, .util-text, .char-desc {
+        font-size: 0.9rem;
+    }
+}
+
+/* Tablets */
+@media (min-width: 769px) and (max-width: 1024px) {
     .slide-content {
         grid-template-columns: 1fr 300px;
         gap: 30px;
@@ -698,95 +851,13 @@ body {
         max-width: 280px;
         height: 200px;
     }
-}
-
-@media (max-width: 768px) {
-    .presentation-container {
-        flex-direction: column;
-    }
-    
-    .slide-navigation {
-        width: 100%;
-        height: auto;
-        display: flex;
-        overflow-x: auto;
-        padding: 10px;
-        order: -1; /* Move navigation to top on small screens */
-    }
-    
-    .nav-slide {
-        min-width: 120px;
-        margin-right: 10px;
-        margin-bottom: 0;
-    }
-    
-    .slide {
-        padding: 20px;
-        height: auto; /* Allow height to adjust to content */
-        min-height: 100vh; /* Ensure it takes at least full viewport height */
-    }
-    
-    .slide-content {
-        grid-template-columns: 1fr; /* Stack content vertically */
-        gap: 20px;
-        height: auto; /* Allow content to expand */
-        max-height: none; /* Remove max-height constraint */
-    }
-    
-    .content-right {
-        order: -1; /* Move image to top on small screens */
-    }
     
     .slide-title {
-        font-size: 2rem;
+        font-size: 2.2rem;
     }
     
     .characteristics-grid {
         grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
-    }
-    
-    .feature-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .utilization-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .management-row {
-        grid-template-columns: 1fr;
-        gap: 10px;
-        text-align: center;
-    }
-    
-    .team-info {
-        position: static;
-        margin: 20px;
-        text-align: center;
-    }
-}
-
-/* Global adjustments for better scaling */
-html {
-    font-size: 16px; /* Base font size */
-}
-
-@media (max-width: 1024px) {
-    html {
-        font-size: 15px;
-    }
-}
-
-@media (max-width: 768px) {
-    html {
-        font-size: 14px;
-    }
-}
-
-@media (max-width: 480px) {
-    html {
-        font-size: 13px;
     }
 }
 
@@ -823,123 +894,6 @@ html {
     }
     100% {
         background-position: -200% 0;
-    }
-}
-
-/* Adicionando ajustes para evitar corte em zoom de 100% */
-@media (min-width: 769px) and (max-width: 1200px) {
-    .slide {
-        padding: 30px; /* Reduzir um pouco o padding para telas maiores, mas não muito grandes */
-    }
-    .slide-content {
-        gap: 30px; /* Reduzir o gap */
-    }
-    .slide-title {
-        font-size: 2.2rem; /* Ajustar tamanho da fonte do título */
-    }
-    .slide-subtitle {
-        font-size: 1.1rem;
-    }
-    .content-block h3 {
-        font-size: 1.3rem;
-    }
-    .scientific-name {
-        font-size: 1.8rem;
-    }
-    .big-number {
-        font-size: 2.5rem;
-    }
-    .unit {
-        font-size: 1rem;
-    }
-    .feature-text, .bullet-list li, .util-text, .char-desc {
-        font-size: 0.9rem;
-    }
-}
-
-@media (min-width: 1201px) {
-    .slide {
-        padding: 50px; /* Aumentar um pouco o padding para telas muito grandes */
-    }
-    .slide-content {
-        gap: 50px; /* Aumentar o gap */
-    }
-    .slide-title {
-        font-size: 2.8rem; /* Ajustar tamanho da fonte do título */
-    }
-    .slide-subtitle {
-        font-size: 1.4rem;
-    }
-    .content-block h3 {
-        font-size: 1.5rem;
-    }
-    .scientific-name {
-        font-size: 2.2rem;
-    }
-    .big-number {
-        font-size: 3.5rem;
-    }
-    .unit {
-        font-size: 1.2rem;
-    }
-    .feature-text, .bullet-list li, .util-text, .char-desc {
-        font-size: 1rem;
-    }
-}
-
-/* Ajustes para garantir que o conteúdo não transborde */
-.slide-content > div {
-    min-width: 0; /* Permite que os itens do grid encolham */
-}
-
-.content-block, .image-container {
-    min-height: 0; /* Permite que os blocos encolham */
-}
-
-/* Ajuste para o painel de navegação em telas pequenas */
-@media (max-width: 768px) {
-    .slide-navigation {
-        width: 100vw; /* Ocupa a largura total da tela */
-        flex-wrap: nowrap; /* Impede que os itens quebrem linha */
-        justify-content: flex-start; /* Alinha os itens ao início */
-    }
-    .nav-slide {
-        flex-shrink: 0; /* Impede que os botões encolham */
-        margin-right: 8px; /* Espaçamento entre os botões */
-        padding: 10px 8px; /* Reduzir padding */
-        font-size: 0.8rem; /* Reduzir fonte */
-    }
-    .slide-number {
-        font-size: 14px;
-    }
-    .slide-title {
-        font-size: 12px;
-    }
-    .presenter-name {
-        font-size: 10px;
-    }
-    .slide-controls {
-        bottom: 10px;
-        padding: 8px 15px;
-        gap: 10px;
-    }
-    .control-btn {
-        width: 30px;
-        height: 30px;
-        font-size: 0.8rem;
-    }
-    .slide-indicator {
-        font-size: 0.9rem;
-    }
-    .team-info {
-        margin: 10px;
-        padding: 10px 15px;
-    }
-    .team-title {
-        font-size: 0.8rem;
-    }
-    .team-member {
-        font-size: 0.75rem;
     }
 }
 
