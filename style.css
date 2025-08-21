@@ -5,18 +5,24 @@
     box-sizing: border-box;
 }
 
+html, body {
+    height: 100%;
+    width: 100%;
+    overflow: hidden; /* Prevent body scroll */
+}
+
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
     color: #333;
-    overflow: hidden;
-    height: 100vh;
 }
 
 .presentation-container {
     display: flex;
     height: 100vh;
+    width: 100vw;
     background: #f5f5f5;
+    overflow: hidden; /* Ensure container itself doesn't cause scrollbars */
 }
 
 /* Slide Navigation Panel */
@@ -26,6 +32,7 @@ body {
     padding: 20px 10px;
     overflow-y: auto;
     box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    flex-shrink: 0; /* Prevent shrinking */
 }
 
 .nav-slide {
@@ -74,17 +81,18 @@ body {
     flex: 1;
     position: relative;
     background: white;
-    overflow: hidden;
+    overflow: hidden; /* Ensure main area doesn't cause scrollbars */
 }
 
 .slide {
     display: none;
     width: 100%;
-    height: 100vh;
+    height: 100vh; /* Use 100vh for full viewport height */
     padding: 40px;
     background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
     position: relative;
-    overflow-y: auto;
+    overflow-y: auto; /* Allow individual slide content to scroll if needed */
+    box-sizing: border-box; /* Include padding in element's total width and height */
 }
 
 .slide.active {
@@ -163,7 +171,9 @@ body {
     display: grid;
     grid-template-columns: 1fr 400px;
     gap: 40px;
-    height: calc(100vh - 200px);
+    height: calc(100vh - 200px); /* Adjust height to account for header/footer/padding */
+    max-height: calc(100vh - 200px); /* Ensure it doesn't exceed viewport */
+    overflow-y: auto; /* Allow content to scroll if it overflows */
 }
 
 .content-left {
@@ -701,6 +711,7 @@ body {
         display: flex;
         overflow-x: auto;
         padding: 10px;
+        order: -1; /* Move navigation to top on small screens */
     }
     
     .nav-slide {
@@ -711,15 +722,19 @@ body {
     
     .slide {
         padding: 20px;
+        height: auto; /* Allow height to adjust to content */
+        min-height: 100vh; /* Ensure it takes at least full viewport height */
     }
     
     .slide-content {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr; /* Stack content vertically */
         gap: 20px;
+        height: auto; /* Allow content to expand */
+        max-height: none; /* Remove max-height constraint */
     }
     
     .content-right {
-        order: -1;
+        order: -1; /* Move image to top on small screens */
     }
     
     .slide-title {
@@ -749,6 +764,29 @@ body {
         position: static;
         margin: 20px;
         text-align: center;
+    }
+}
+
+/* Global adjustments for better scaling */
+html {
+    font-size: 16px; /* Base font size */
+}
+
+@media (max-width: 1024px) {
+    html {
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 768px) {
+    html {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    html {
+        font-size: 13px;
     }
 }
 
@@ -785,6 +823,123 @@ body {
     }
     100% {
         background-position: -200% 0;
+    }
+}
+
+/* Adicionando ajustes para evitar corte em zoom de 100% */
+@media (min-width: 769px) and (max-width: 1200px) {
+    .slide {
+        padding: 30px; /* Reduzir um pouco o padding para telas maiores, mas não muito grandes */
+    }
+    .slide-content {
+        gap: 30px; /* Reduzir o gap */
+    }
+    .slide-title {
+        font-size: 2.2rem; /* Ajustar tamanho da fonte do título */
+    }
+    .slide-subtitle {
+        font-size: 1.1rem;
+    }
+    .content-block h3 {
+        font-size: 1.3rem;
+    }
+    .scientific-name {
+        font-size: 1.8rem;
+    }
+    .big-number {
+        font-size: 2.5rem;
+    }
+    .unit {
+        font-size: 1rem;
+    }
+    .feature-text, .bullet-list li, .util-text, .char-desc {
+        font-size: 0.9rem;
+    }
+}
+
+@media (min-width: 1201px) {
+    .slide {
+        padding: 50px; /* Aumentar um pouco o padding para telas muito grandes */
+    }
+    .slide-content {
+        gap: 50px; /* Aumentar o gap */
+    }
+    .slide-title {
+        font-size: 2.8rem; /* Ajustar tamanho da fonte do título */
+    }
+    .slide-subtitle {
+        font-size: 1.4rem;
+    }
+    .content-block h3 {
+        font-size: 1.5rem;
+    }
+    .scientific-name {
+        font-size: 2.2rem;
+    }
+    .big-number {
+        font-size: 3.5rem;
+    }
+    .unit {
+        font-size: 1.2rem;
+    }
+    .feature-text, .bullet-list li, .util-text, .char-desc {
+        font-size: 1rem;
+    }
+}
+
+/* Ajustes para garantir que o conteúdo não transborde */
+.slide-content > div {
+    min-width: 0; /* Permite que os itens do grid encolham */
+}
+
+.content-block, .image-container {
+    min-height: 0; /* Permite que os blocos encolham */
+}
+
+/* Ajuste para o painel de navegação em telas pequenas */
+@media (max-width: 768px) {
+    .slide-navigation {
+        width: 100vw; /* Ocupa a largura total da tela */
+        flex-wrap: nowrap; /* Impede que os itens quebrem linha */
+        justify-content: flex-start; /* Alinha os itens ao início */
+    }
+    .nav-slide {
+        flex-shrink: 0; /* Impede que os botões encolham */
+        margin-right: 8px; /* Espaçamento entre os botões */
+        padding: 10px 8px; /* Reduzir padding */
+        font-size: 0.8rem; /* Reduzir fonte */
+    }
+    .slide-number {
+        font-size: 14px;
+    }
+    .slide-title {
+        font-size: 12px;
+    }
+    .presenter-name {
+        font-size: 10px;
+    }
+    .slide-controls {
+        bottom: 10px;
+        padding: 8px 15px;
+        gap: 10px;
+    }
+    .control-btn {
+        width: 30px;
+        height: 30px;
+        font-size: 0.8rem;
+    }
+    .slide-indicator {
+        font-size: 0.9rem;
+    }
+    .team-info {
+        margin: 10px;
+        padding: 10px 15px;
+    }
+    .team-title {
+        font-size: 0.8rem;
+    }
+    .team-member {
+        font-size: 0.75rem;
     }
 }
 
