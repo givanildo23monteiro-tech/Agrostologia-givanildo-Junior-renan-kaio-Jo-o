@@ -896,4 +896,64 @@ body {
         background-position: -200% 0;
     }
 }
+/* Ajustes extras para mobile */
+@media (max-width: 768px) {
+    html, body {
+        overflow: auto; /* permite rolagem em celulares */
+        height: auto;
+    }
 
+    .presentation-container {
+        height: auto;
+        min-height: 100vh;
+    }
+
+    .slide {
+        height: auto; /* deixa o slide se ajustar ao conteúdo */
+        min-height: calc(100vh - 100px);
+    }
+
+    .slide-content {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .content-left, .content-right {
+        width: 100%;
+    }
+
+    .slide-header {
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+    }
+
+    .slide-title {
+        font-size: 1.4rem;
+    }
+
+    .slide-subtitle {
+        font-size: 0.9rem;
+    }
+
+    .slide-image {
+        height: auto;
+        max-height: 180px;
+    }
+
+    .content-block {
+        padding: 15px;
+    }
+}
+@media (max-width: 768px) {
+    /* ... mantém os ajustes anteriores ... */
+
+    .slide {
+        height: auto;
+        min-height: calc(100vh - 100px);
+        padding-bottom: 80px; /* 🔥 espaço extra p/ rolagem */
+    }
+
+    .slide-content {
+        margin-bottom: 40px; /* dá folga antes do rodapé */
+    }
+}
