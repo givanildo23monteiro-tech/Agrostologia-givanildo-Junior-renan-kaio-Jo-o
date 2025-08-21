@@ -672,13 +672,8 @@ body {
     margin-bottom: 8px;
     font-size: 0.9rem;
 }
-
-.team-members {
-    display: flex;
-    gap: 10px;
-    flex-wrap
-    /* Ajustes específicos para iOS Safari */
-}@supports (-webkit-touch-callout: none) {
+/* Ajustes específicos para iOS Safari */
+@supports (-webkit-touch-callout: none) {
     html, body {
         height: -webkit-fill-available !important;
         min-height: -webkit-fill-available !important;
@@ -696,3 +691,8 @@ body {
         height: auto !important;
     }
 }
+.team-members {
+    display: flex;
+    gap: 10px;
+    flex-wrap
+    
